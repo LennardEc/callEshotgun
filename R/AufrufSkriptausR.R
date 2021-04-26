@@ -1,5 +1,9 @@
 library(reticulate)
 
+py_config()
+
+getwd()
+
 checkLibrarys <- function() {
   library(reticulate)
 
@@ -22,7 +26,7 @@ checkLibrarys <- function() {
 
 
 callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
-  py_run_file("~/R/eshotgun/AufrufScript.py")
+  py_run_file("../eshotgun/AufrufScript.py")
   np <- import("numpy", convert = FALSE)
 
   Xnew <- tryCatch({
@@ -70,24 +74,17 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
       stop()
     }
 
-
     # if the column is 1 choose special case
     if(xcol >= 2) {
       py$callShotgun(np$array(Xtr), np$array(Ytr), np$array(f_lb), np$array(f_ub), q, epsilon)
     }else {
-      x <- matrix(f_lb, ncol=1)
-      y <- matrix(f_ub, ncol=1)
-      x <- np$array(x)
-      y <- np$array(y)
-      print(x)
-      print(y)
-      py$callShotgun(np$array(Xtr), np$array(Ytr), x, y, q, epsilon)
+      py$callShotgun(np$array(Xtr), np$array(Ytr), f_lb, f_ub, q, epsilon)
     }
 
   }, warning = function(w) {
 
   }, error = function(e) {
-    print("error")
+    print(e)
   }, finally = {
 
   })
@@ -106,9 +103,9 @@ sphere <- function (x) {
 }
 
 
-#Xtr <- matrix(runif(20),ncol=2)
-#Ytr <- sphere(Xtr)
-#print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
+Xtr <- matrix(runif(20),ncol=2)
+Ytr <- sphere(Xtr)
+print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
 #print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0,1), 10L, 0.1))
 
 
@@ -117,6 +114,6 @@ Ytr <- sphere(Xtr)
 print(callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2))
 
 #testthat
-x <- c(3)
-x <- matrix(x, ncol=1)
+#x <- c(3)
+#x <- matrix(x, ncol=1)
 #print(x)
