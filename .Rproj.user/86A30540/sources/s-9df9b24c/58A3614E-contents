@@ -1,0 +1,36 @@
+library(reticulate)
+
+initialiser <- function() {
+  # Pip's requirement check is faster, also conda doesn't include all needed packages
+  py_install("pygame", pip=TRUE)
+  py_install("GPy==1.9.9", pip=TRUE)
+  py_install("cma", pip=TRUE)
+  py_install("scipy", pip=TRUE)
+  py_install("numpy", pip=TRUE)
+  py_install("pyDOE2", pip=TRUE)
+  py_install("pygmo", pip=TRUE)
+}
+
+
+sphere <- function (x) {
+  matrix(apply(x, # matrix
+               1, # margin (apply over rows)
+               function(x) {
+                 sum(x ^ 2)  # objective function
+               }),
+         , 1) # number of columns
+}
+
+Xtr <- matrix(runif(20),ncol=1)
+Ytr <- sphere(Xtr)
+
+callEshotgun <- function() {}
+
+  #Todo path
+  py_run_file("~/R/CallEshotgun/CopyOfeshotgun/callShotgun.py")
+  np <- import("numpy", convert = FALSE)
+
+  x <- py$callShotgun(np$array(Xtr), np$array(Ytr), np$array(c(-5.12)), np$array(c(5.12)))
+  print(x)
+
+
