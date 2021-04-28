@@ -1,8 +1,5 @@
 library(reticulate)
 
-py_config()
-
-getwd()
 
 checkLibrarys <- function() {
   library(reticulate)
@@ -102,6 +99,7 @@ sphere <- function (x) {
          , 1) # number of columns
 }
 
+checkLibrarys()
 
 Xtr <- matrix(runif(20),ncol=2)
 Ytr <- sphere(Xtr)
