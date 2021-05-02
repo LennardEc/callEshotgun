@@ -22,6 +22,8 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
   py_run_file("../eshotgun/EshotgunPy.py")
   np <- import("numpy", convert = FALSE)
 
+  #check if Ytr is an vector, matrix etc: not an atom
+
   Xnew <- tryCatch({
     xrow <- nrow(Xtr)
     xcol <- ncol(Xtr)
@@ -78,4 +80,15 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
   })
 
   return(Xnew)
+}
+
+callEshotGunUnchecked <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
+  py_run_file("../eshotgun/EshotgunPy.py")
+  np <- import("numpy", convert = FALSE)
+
+  if(ncol(Xtr) >= 2) {
+    py$callShotgun(np$array(Xtr), np$array(Ytr), np$array(f_lb), np$array(f_ub), q, epsilon)
+  }else {
+    py$callShotgun(np$array(Xtr), np$array(Ytr), f_lb, f_ub, q, epsilon)
+  }
 }

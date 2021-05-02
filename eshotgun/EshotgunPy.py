@@ -612,8 +612,10 @@ def build_and_fit_GP(Xtr, Ytr):
 
 def callShotgun(Xtr, Ytr, f_lb, f_ub, q=10, epsilon = 0.1):
     model = build_and_fit_GP(Xtr, Ytr)
+    
     if type(f_lb) is float:
       Xnew = egreedy_shotgun_v2(model, np.array([f_lb]), np.array([f_ub]), 1000, q, None, epsilon)
     else:
       Xnew = egreedy_shotgun_v2(model, f_lb, f_ub, 1000, q, None, epsilon)
     return Xnew
+    
