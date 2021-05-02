@@ -56,7 +56,14 @@ egg <- function(xx) {
   y <- term1 + term2
   return(y)
 }
-
+modifiedEgg <- function(x) {
+  matrix(apply(x, # matrix
+               1, # margin (apply over rows)
+               function(x){
+                 egg(x)
+               }),
+         , 1) # number of columns
+}
 
 schwef <- function(xx) {
   ##########################################################################
@@ -98,7 +105,14 @@ schwef <- function(xx) {
   y <- 418.9829*d - sum
   return(y)
 }
-
+modifiedschwef <- function(x) {
+  matrix(apply(x, # matrix
+               1, # margin (apply over rows)
+               function(x){
+                 schwef(x)
+               }),
+         , 1) # number of columns
+}
 
 levy <- function(xx) {
   ##########################################################################
@@ -153,7 +167,6 @@ modifiedLevy <- function(x) {
                }),
          , 1) # number of columns
 }
-
 
 branin <- function(xx, a=1, b=5.1/(4*pi^2), c=5/pi, r=6, s=10, t=1/(8*pi)) {
   ##########################################################################
@@ -213,28 +226,35 @@ modifiedBranin <- function(x) {
   }
 
 
-#Xtr <- matrix(runif(20),ncol=2)
-#Ytr <- sphere(Xtr)
-#print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
-#print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0,1), 10L, 0.1))
+Xtr <- matrix(runif(20),ncol=2)
+Ytr <- sphere(Xtr)
+print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
+print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0,1), 10L, 0.1))
 
-#Xtr <- matrix(runif(20),ncol=1)
-#Ytr <- sphere(Xtr)
-#print(callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2))
+
+Xtr <- matrix(runif(20),ncol=1)
+Ytr <- sphere(Xtr)
+print(callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2))
+
 
 Xtr <- matrix(runif(20),ncol=2)
 Ytr <- modifiedLevy(Xtr)
-print(callEshotGunUnchecked(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1))
+print(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1))
+
 
 Xtr <- matrix(runif(20),ncol=1)
 Ytr <- modifiedLevy(Xtr)
-print(callEshotGunUnchecked(Xtr, Ytr, c(-5), c(5), 10L, 0.1))
+print(callEshotgun(Xtr, Ytr, c(-5), c(5), 10L, 0.1))
 
 
 Xtr <- matrix(runif(20),ncol=2)
 Ytr <- modifiedBranin(Xtr)
-print(callEshotGunUnchecked(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1))
+print(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1))
 
 Xtr <- matrix(runif(20),ncol=3)
 Ytr <- modifiedBranin(Xtr)
-print(callEshotGunUnchecked(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.1))
+print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.1))
+
+Xtr <- matrix(runif(20),ncol=3)
+Ytr <- modifiedBranin(Xtr)
+print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0))

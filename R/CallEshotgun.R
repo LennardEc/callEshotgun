@@ -18,7 +18,7 @@ checkLibrarys <- function() {
 }
 
 
-callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
+callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q=10L, epsilon=0.1) {
   py_run_file("../eshotgun/EshotgunPy.py")
   np <- import("numpy", convert = FALSE)
 
@@ -36,7 +36,10 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
 
     # check for equal dimensions for Xtr and Ytr
     if(xrow != yrow) {
-      stop("Xtr and Ytr have different Shapes")
+      errorMsg <- paste("Xtr and Ytr have different Shapes\n",
+                        paste("Xtr is ", xrow, " and Ytr is ", yrow, "\n", sep = "")
+                        ,sep="")
+      stop()
     }
 
 
@@ -44,15 +47,13 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
     if(!(dimLb == dimUb && dimLb == xcol)) {
 
       if(dimLb != dimUb) {
-        errorMsg <- c("Dimension of bounds don't match!",
-                      paste("Dimension of Lower bound: ", dimLb, sep=""),
-                      paste("Dimension of Upper bound: ", dimUb, sep=""))
-        cat(errorMsg, sep="\n")
+        errorMsg <- paste("Dimension of bounds don't match!",
+                      paste("\nDimension of Lower bound: ", dimLb, sep=""),
+                      paste("\nDimension of Upper bound: ", dimUb, sep=""), sep="")
       }else {
-        errorMsg <- c("Dimension of bounds and Xtr don't match!",
-                      paste("Dimension of Lower bound: ", dimLb, sep=""),
-                      paste("Dimension of Xtr: ", xcol, sep=""))
-        cat(errorMsg, sep="\n")
+        errorMsg <- paste("Dimension of bounds and Xtr don't match!",
+                      paste("\nDimension of Lower bound: ", dimLb, sep=""),
+                      paste("\nDimension of Xtr: ", xcol, sep=""), sep="")
       }
 
       stop()
@@ -62,9 +63,10 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
     #Notwendig? eshotgun wirft keinen Fehler
     #check epsilon between 0.0 and 1.0
     if(!(epsilon >= 0.0 && epsilon <= 1.0)) {
-      cat("Epsilon has to be between 0.0 and 1.0")
+      errorMsg <- paste("Epsilon has to be between 0.0 and 1.0\n","Passed Epsilon is ", epsilon, sep ="")
       stop()
     }
+
 
     # if the column is 1 choose special case
     if(xcol >= 2) {
@@ -74,7 +76,7 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q, epsilon) {
     }
 
   }, error = function(e) {
-    print(e)
+    cat(paste("Error: ",errorMsg, "\n", sep=""))
   }, finally = {
 
   })
