@@ -1,0 +1,117 @@
+if (!require("reticulate")) install.packages("reticulate");
+library(reticulate)
+
+
+#' Check for required Library and Python Packages
+#'
+#' The function will download all required Python Packages that
+#' are needed to e-shotgun to run properly.
+#'
+#' @import reticulate
+#'
+#' @export
+#' @examples checkLibrarys()
+checkLibrarys <- function() {
+  # Conda doesn't include all needed imports
+  py_install("numpy", pip=TRUE)
+  py_install("GPy==1.9.9", pip=TRUE)
+  py_install("pygmo", pip=TRUE)
+  py_install("scipy", pip=TRUE)
+  py_install("cma", pip=TRUE)
+  py_install("nlopt", pip=TRUE)
+  py_install("pyDOE2", pip=TRUE)
+  py_install("numpy-stl", pip=TRUE)
+  py_install("matplotlib", pip=TRUE)
+}
+
+
+#' Call the e-shotgun function in python
+#'
+#' The function checks the passed parameter and than calls the e-shotgun Python
+#' implementation and returns a matrix with the values evaluated by the e-shotgun
+#'
+#' @param Xtr a matrix containing the initial points
+#' @param Ytr a matrix containing the evaluation of Xtr with a given function
+#' @param f_lb a vector with the values of the lower bounds
+#' @param f_ub a vector with the values of the upper bounds
+#' @param q the amount if points that the e-shotgun should evaluate
+#' @param epsilon the epsilon value of the e-shotgun
+#'
+#' @return a matrix or a vector
+#' @export
+#'
+#' @examples
+callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q=10L, epsilon=0.1) {
+  py_run_file("../eshotgun/EshotgunPy.py")
+  np <- import("numpy", convert = FALSE)
+
+  Xnew <- tryCatch({
+    errorMsg <- "Unkown"
+    xrow <- nrow(Xtr)
+    xcol <- ncol(Xtr)
+
+    yrow <- nrow(Ytr)
+
+    if(is.null(yrow)) {
+      yrow <- length(Ytr)
+    }
+
+    dimLb <- length(f_lb)
+    dimUb <- length(f_ub)
+
+
+    # check for equal dimensions for Xtr and Ytr
+    if(xrow != yrow) {
+      errorMsg <- paste("Xtr and Ytr have unequal rows\nXtr is "
+                        , xrow, " and Ytr is ", yrow, sep = "")
+      stop()
+    }
+
+    #check lower and upper bound for a fitting dimension
+    if(!(dimLb == dimUb && dimLb == xcol)) {
+
+      if(dimLb != dimUb) {
+        errorMsg <- paste("Dimension of bounds don't match!",
+                      paste("\nDimension of Lower bound: ", dimLb, sep=""),
+                      paste("\nDimension of Upper bound: ", dimUb, sep=""), sep="")
+      }else {
+        errorMsg <- paste("Dimension of bounds and Xtr don't match!",
+                      paste("\nDimension of Lower bound: ", dimLb, sep=""),
+                      paste("\nDimension of Xtr: ", xcol, sep=""), sep="")
+      }
+
+      stop()
+    }
+
+    #check for a lower bound that is smaller than the upper bound or don't have
+    #intersecting values. All values of the lower bound have to be strictly smaller
+    #as well as all values of the upper bound have to be strictly bigger than lower bound
+    maxLB = max(f_lb)
+    minUB = min(f_ub)
+
+    if(maxLB >= minUB) {
+      errorMsg <- "All Values of the lower bound have to be strictly smaller."
+
+      stop()
+    }
+
+    #check epsilon between 0.0 and 1.0
+    if(!(epsilon >= 0.0 && epsilon <= 1.0)) {
+      errorMsg <- paste("Epsilon has to be between 0.0 and 1.0\n","Passed Epsilon is ",
+                        epsilon, sep ="")
+      stop()
+    }
+
+    # if the column is 1 choose special case
+    if(xcol >= 2) {
+      py$callShotgun(np$array(Xtr), np$array(Ytr), np$array(f_lb), np$array(f_ub), q, epsilon)
+    }else {
+      py$callShotgun(np$array(Xtr), np$array(Ytr), f_lb, f_ub, q, epsilon)
+    }
+
+  }, error = function(e) {
+    cat(paste("Error:\n", errorMsg, "\n", sep=""))
+  })
+
+  return(Xnew)
+}
