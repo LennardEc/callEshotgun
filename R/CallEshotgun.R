@@ -83,9 +83,8 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q=10L, epsilon=0.1) {
       stop()
     }
 
-    #check for a lower bound that is smaller than the upper bound or don't have
-    #intersecting values. All values of the lower bound have to be strictly smaller
-    #as well as all values of the upper bound have to be strictly bigger than lower bound
+    #check for logical bounds
+    #All values of the lower bound have to be strictly smaller
     maxLB = max(f_lb)
     minUB = min(f_ub)
 
