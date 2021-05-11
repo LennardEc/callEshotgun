@@ -79,16 +79,15 @@ callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q=10L, epsilon=0.1) {
       stop()
     }
 
-    #check for logical bounds
+    #check that every number at the corresponding index of lower bound is
+    #smaller than the upper bound
     #All values of the lower bound have to be strictly smaller
-    maxLB = max(f_lb)
-    minUB = min(f_ub)
-
-    if(maxLB >= minUB) {
+    if(any(f_lb > f_ub)){
       errorMsg <- "All Values of the lower bound have to be strictly smaller."
 
       stop()
     }
+
 
     #check epsilon between 0.0 and 1.0
     if(!(epsilon >= 0.0 && epsilon <= 1.0)) {

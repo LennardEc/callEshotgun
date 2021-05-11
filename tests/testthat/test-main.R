@@ -1,11 +1,89 @@
+#checking for the right dimensions and legal values
+test_that("test bounds", {
+  Xtr <- matrix(runif(20),ncol=2)
+  Ytr <- sphere(Xtr)
 
-test_that("first test", {
+  # right dimension, legal values
+  testthat::expect_type(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1),
+    typeof(Xtr)
+  )
+
+  # right dimension, legal values
+  testthat::expect_type(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1),
+    typeof(Xtr)
+  )
+
+  # right dimension, legal values
+  testthat::expect_type(
+    callEshotgun(Xtr, Ytr, c(-4,-5), c(-3,1), 10L, 0.1)
+    , typeof(Xtr)
+  )
+
+  #wrong dimension
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0, 1), 10L, 0.1)
+    , NULL
+  )
+
+  #wrong dimension
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1, 0), c(5.12, 0, 1), 10L, 0.1)
+    , NULL
+  )
+
+  #values are not strictly smaller
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(1,1), c(1,1), 10L, 0.1)
+    , NULL
+  )
+
+  #values are not strictly smaller
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(0,1), c(2,1), 10L, 0.1)
+    , NULL
+  )
+
+  #value of lower bound is bigger than the value of the upper bound
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(0,3), c(2,2), 10L, 0.1)
+    , NULL
+  )
+
+  #value of upper bound is lower than the value of the lower bound
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(0,0), c(2,-1), 10L, 0.1)
+    , NULL
+  )
+
+  #value of upper bound is lower than the value of the lower bound
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(0,0), c(-3,-1), 10L, 0.1)
+    , NULL
+  )
+
+  Xtr <- matrix(runif(20),ncol=3)
+  Ytr <- sphere(Xtr)
+
+  testthat::expect_type(
+    callEshotgun(Xtr, Ytr, c(5,0,200), c(10,10,210), 10L, 0.1)
+    , typeof(Xtr)
+  )
+
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(5,0,200), c(10,10,190), 10L, 0.1)
+    , NULL
+  )
+
+})
+
+
   # first group
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- sphere(Xtr)
   print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
 
-  testbounds <- function(Xtr, Ytr) {
     testthat::expect_equal(
       nrow(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)), nrow(Xtr)
     )
@@ -43,27 +121,7 @@ test_that("first test", {
       callEshotgun(Xtr, Ytr, c(0,0), c(-3,-1), 10L, 0.1)
       , NULL
     )
-  }
 
-  testepsilon <- function(Xtr, Ytr) {
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 2.1)
-      , NULL
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, -2.1)
-      , NULL
-    )
-
-
-    Xtr <- matrix(runif(20),ncol=3)
-    Ytr <- modifiedBranin(Xtr)
-    testthat::expect_equal(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0), NULL)
-  }
-
-  testbounds(Xtr, Ytr)
-  testepsilon(Xtr, Ytr)
 
 
 
@@ -97,13 +155,52 @@ test_that("first test", {
   Ytr <- modifiedBranin(Xtr)
   print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0))
 
+test_that("test dimensions", {
 
+})
+
+test_that("Xtr and Ytr equality", {
+
+})
+
+#2 tests for epsilon lower than 0.0
+#2 tests for epsilon higher than 1.0
+#2 tests for epsilon equal to 0.0 and 1.0
+test_that("test epsilon", {
   Xtr <- matrix(runif(20),ncol=2)
-  for(x in 1:5) {
-    Ytr <- sphere(Xtr)
-    Xtr = callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)
-    print(Xtr)
-  }
+  Ytr <- modifiedBranin(Xtr)
+
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 2.1)
+    , NULL
+  )
+
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 1.1)
+    , NULL
+  )
+
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, -2.1)
+    , NULL
+  )
+
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, -1.1)
+    , NULL
+  )
+
+  Xtr <- matrix(runif(20),ncol=3)
+  Ytr <- modifiedBranin(Xtr)
+  testthat::expect_type(
+    callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.0),
+    typeof(Xtr)
+  )
+
+  testthat::expect_type(
+    callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 1.0),
+    typeof(Xtr)
+  )
 })
 
 
