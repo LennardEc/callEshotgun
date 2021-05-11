@@ -1,3 +1,11 @@
+#' sphere
+#'
+#' @param x Vector
+#'
+#' @return a matrix
+#' @export
+#'
+#' @examples
 sphere <- function (x) {
   matrix(apply(x, # matrix
                1, # margin (apply over rows)
@@ -7,6 +15,15 @@ sphere <- function (x) {
          , 1) # number of columns
 }
 
+
+#' egg
+#'
+#' @param x Vector
+#'
+#' @return a atom
+#' @export
+#'
+#' @examples
 egg <- function(xx) {
   ##########################################################################
   #
@@ -49,6 +66,16 @@ egg <- function(xx) {
   y <- term1 + term2
   return(y)
 }
+
+
+#' modifiedEgg
+#'
+#' @param x vector
+#'
+#' @return a matrix
+#' @export
+#'
+#' @examples
 modifiedEgg <- function(x) {
   matrix(apply(x, # matrix
                1, # margin (apply over rows)
@@ -58,6 +85,15 @@ modifiedEgg <- function(x) {
          , 1) # number of columns
 }
 
+
+#' schwef
+#'
+#' @param x vector
+#'
+#' @return a atom
+#' @export
+#'
+#' @examples
 schwef <- function(xx) {
   ##########################################################################
   #
@@ -98,6 +134,16 @@ schwef <- function(xx) {
   y <- 418.9829*d - sum
   return(y)
 }
+
+
+#' modifiedschwef
+#'
+#' @param x vector
+#'
+#' @return a matrix
+#' @export
+#'
+#' @examples
 modifiedschwef <- function(x) {
   matrix(apply(x, # matrix
                1, # margin (apply over rows)
@@ -107,6 +153,15 @@ modifiedschwef <- function(x) {
          , 1) # number of columns
 }
 
+
+#' levy
+#'
+#' @param x vector
+#'
+#' @return a atom
+#' @export
+#'
+#' @examples
 levy <- function(xx) {
   ##########################################################################
   #
@@ -152,6 +207,15 @@ levy <- function(xx) {
   y <- term1 + sum + term3
   return(y)
 }
+
+#' modifiedlevy
+#'
+#' @param x vector
+#'
+#' @return a matrix
+#' @export
+#'
+#' @examples
 modifiedLevy <- function(x) {
   matrix(apply(x, # matrix
                1, # margin (apply over rows)
@@ -161,6 +225,21 @@ modifiedLevy <- function(x) {
          , 1) # number of columns
 }
 
+
+#' branin
+#'
+#' @param x vector
+#' @param a double
+#' @param b double
+#' @param c double
+#' @param r double
+#' @param s double
+#' @param t double
+#'
+#' @return a matrix
+#' @export
+#'
+#' @examples
 branin <- function(xx, a=1, b=5.1/(4*pi^2), c=5/pi, r=6, s=10, t=1/(8*pi)) {
   ##########################################################################
   #
@@ -209,6 +288,15 @@ branin <- function(xx, a=1, b=5.1/(4*pi^2), c=5/pi, r=6, s=10, t=1/(8*pi)) {
   y <- term1 + term2 + s
   return(y)
 }
+
+#' modifiedBranin
+#'
+#' @param x vector
+#'
+#' @return a matrix
+#' @export
+#'
+#' @examples
 modifiedBranin <- function(x) {
   matrix(apply(x, # matrix
                1, # margin (apply over rows)

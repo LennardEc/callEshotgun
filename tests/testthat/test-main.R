@@ -103,8 +103,14 @@ test_that("test dimensions", {
   #working
   newX <-callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2)
   testthat::expect_equal(
-    nrow(newX), nrow(Xtr)
+    ncol(newX), ncol(Xtr)
   )
+
+  #10 points get evaluaded
+  testthat::expect_equal(
+    nrow(newX) + 10 , nrow(Xtr)
+  )
+
 
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- modifiedLevy(Xtr)
@@ -130,9 +136,12 @@ test_that("test dimensions", {
     NULL
   )
 
-  # Edit the Ytr and Xtr-Matrix to recover the error
+
+  # Edit the Ytr-Matrix to provoke a error
+  Xtr <- matrix(runif(20),ncol=1)
+  Ytr <- modifiedLevy(Xtr)[1:15]
   testthat::expect_equal(
-    callEshotgun(Xtr[1:8], Ytr, c(-5), c(5), 10L, 0.1),
+    callEshotgun(Xtr, Ytr, c(-5), c(5), 10L, 0.1),
     NULL
   )
 
@@ -156,10 +165,6 @@ test_that("test dimensions", {
   Xtr <- matrix(runif(20),ncol=3)
   Ytr <- modifiedBranin(Xtr)
   newX <- callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.1)
-  testthat::expect_equal(
-    nrow(newX),
-    nrow(Xtr)
-  )
 
   #working
   testthat::expect_equal(
