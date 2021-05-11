@@ -1,7 +1,3 @@
-if (!require("reticulate")) install.packages("reticulate");
-library(reticulate)
-
-
 #' Check for required Library and Python Packages
 #'
 #' The function will download all required Python Packages that
@@ -42,7 +38,7 @@ checkLibrarys <- function() {
 #'
 #' @examples
 callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q=10L, epsilon=0.1) {
-  py_run_file("../eshotgun/EshotgunPy.py")
+  py_run_file(system.file("EshotgunPy.py", package="CallEshotgun"))
   np <- import("numpy", convert = FALSE)
 
   Xnew <- tryCatch({

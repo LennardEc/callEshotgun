@@ -1,10 +1,3 @@
-library(testthat)
-local_edition(3)
-
-source("~/R/rshotgunsmall/R/CallEshotgun.R")
-#checkLibrarys()
-
-
 sphere <- function (x) {
   matrix(apply(x, # matrix
                1, # margin (apply over rows)
@@ -217,117 +210,10 @@ branin <- function(xx, a=1, b=5.1/(4*pi^2), c=5/pi, r=6, s=10, t=1/(8*pi)) {
   return(y)
 }
 modifiedBranin <- function(x) {
-    matrix(apply(x, # matrix
-                 1, # margin (apply over rows)
-                 function(x){
-                   branin(x)
-                 }),
-           , 1) # number of columns
-  }
-
-
-# first group
-Xtr <- matrix(runif(20),ncol=2)
-Ytr <- sphere(Xtr)
-print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
-
-testbounds <- function(Xtr, Ytr) {
-  testthat::expect_equal(
-    nrow(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)), nrow(Xtr)
-  )
-
-  testthat::expect_equal(
-    nrow(callEshotgun(Xtr, Ytr, c(-4,-5), c(-3,1), 10L, 0.1)), nrow(Xtr)
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0, 1), 10L, 0.1)
-    , NULL
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(1,1), c(1,1), 10L, 0.1)
-    , NULL
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(0,1), c(2,1), 10L, 0.1)
-    , NULL
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(0,3), c(2,2), 10L, 0.1)
-    , NULL
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(0,0), c(2,-1), 10L, 0.1)
-    , NULL
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(0,0), c(-3,-1), 10L, 0.1)
-    , NULL
-  )
+  matrix(apply(x, # matrix
+               1, # margin (apply over rows)
+               function(x){
+                 branin(x)
+               }),
+         , 1) # number of columns
 }
-
-testepsilon <- function(Xtr, Ytr) {
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 2.1)
-    , NULL
-  )
-
-  testthat::expect_equal(
-    callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, -2.1)
-    , NULL
-  )
-
-
-  Xtr <- matrix(runif(20),ncol=3)
-  Ytr <- modifiedBranin(Xtr)
-  testthat::expect_equal(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0), NULL)
-}
-
-testbounds(Xtr, Ytr)
-testepsilon(Xtr, Ytr)
-
-
-
-Xtr <- matrix(runif(20),ncol=1)
-Ytr <- sphere(Xtr)
-print(callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2))
-
-
-Xtr <- matrix(runif(20),ncol=2)
-Ytr <- modifiedLevy(Xtr)
-testthat::expect_equal(nrow(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), nrow(Xtr))
-testthat::expect_equal(ncol(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), ncol(Xtr))
-
-# Edit the Ytr-Matrix to provoke a error
-Xtr <- matrix(runif(20),ncol=1)
-Ytr <- modifiedLevy(Xtr)[1:8]
-testthat::expect_equal(callEshotgun(Xtr, Ytr, c(-5), c(5), 10L, 0.1), NULL)
-
-
-Xtr <- matrix(runif(20),ncol=2)
-Ytr <- modifiedBranin(Xtr)
-testthat::expect_equal(nrow(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), nrow(Xtr))
-testthat::expect_equal(ncol(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), ncol(Xtr))
-
-
-Xtr <- matrix(runif(20),ncol=3)
-Ytr <- modifiedBranin(Xtr)
-print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.1))
-
-Xtr <- matrix(runif(20),ncol=3)
-Ytr <- modifiedBranin(Xtr)
-print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0))
-
-
-Xtr <- matrix(runif(20),ncol=2)
-for(x in 1:5) {
-  Ytr <- sphere(Xtr)
-  Xtr = callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)
-  print(Xtr)
-}
-
