@@ -1,4 +1,4 @@
-#checking for the right dimensions and legal values
+#checking for the right dimensions and legal values of bounds
 test_that("test bounds", {
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- sphere(Xtr)
@@ -75,97 +75,105 @@ test_that("test bounds", {
     callEshotgun(Xtr, Ytr, c(5,0,200), c(10,10,190), 10L, 0.1)
     , NULL
   )
-
 })
 
+#check for the right shape of the return value
+test_that("test dimensions", {
 
-  # first group
+  #working
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- sphere(Xtr)
-  print(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1))
 
-    testthat::expect_equal(
-      nrow(callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)), nrow(Xtr)
-    )
+  #working
+  newX <- callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)
+  testthat::expect_equal(
+    nrow(newX), nrow(Xtr)
+  )
 
-    testthat::expect_equal(
-      nrow(callEshotgun(Xtr, Ytr, c(-4,-5), c(-3,1), 10L, 0.1)), nrow(Xtr)
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0, 1), 10L, 0.1)
-      , NULL
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(1,1), c(1,1), 10L, 0.1)
-      , NULL
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(0,1), c(2,1), 10L, 0.1)
-      , NULL
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(0,3), c(2,2), 10L, 0.1)
-      , NULL
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(0,0), c(2,-1), 10L, 0.1)
-      , NULL
-    )
-
-    testthat::expect_equal(
-      callEshotgun(Xtr, Ytr, c(0,0), c(-3,-1), 10L, 0.1)
-      , NULL
-    )
-
-
+  #working
+  newX <- callEshotgun(Xtr, Ytr, c(-4,-5), c(-3,1), 10L, 0.1)
+  testthat::expect_equal(
+    nrow(newX), nrow(Xtr)
+  )
 
 
   Xtr <- matrix(runif(20),ncol=1)
   Ytr <- sphere(Xtr)
-  print(callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2))
 
+  #working
+  newX <-callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2)
+  testthat::expect_equal(
+    nrow(newX), nrow(Xtr)
+  )
 
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- modifiedLevy(Xtr)
-  testthat::expect_equal(nrow(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), nrow(Xtr))
-  testthat::expect_equal(ncol(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), ncol(Xtr))
+
+  #working
+  newX <- callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)
+  testthat::expect_equal(
+    nrow(newX),
+    nrow(Xtr)
+  )
+
+  #working
+  testthat::expect_equal(
+    ncol(newX),
+    ncol(Xtr)
+  )
 
   # Edit the Ytr-Matrix to provoke a error
   Xtr <- matrix(runif(20),ncol=1)
   Ytr <- modifiedLevy(Xtr)[1:8]
-  testthat::expect_equal(callEshotgun(Xtr, Ytr, c(-5), c(5), 10L, 0.1), NULL)
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5), c(5), 10L, 0.1),
+    NULL
+  )
+
+  # Edit the Ytr and Xtr-Matrix to recover the error
+  testthat::expect_equal(
+    callEshotgun(Xtr[1:8], Ytr, c(-5), c(5), 10L, 0.1),
+    NULL
+  )
 
 
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- modifiedBranin(Xtr)
-  testthat::expect_equal(nrow(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), nrow(Xtr))
-  testthat::expect_equal(ncol(callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)), ncol(Xtr))
 
+  #working
+  newX <- callEshotgun(Xtr, Ytr, c(-5,-1), c(5,1), 10L, 0.1)
+  testthat::expect_equal(
+    nrow(newX),
+    nrow(Xtr)
+  )
+
+  #working
+  testthat::expect_equal(
+    ncol(newX),
+    ncol(Xtr)
+  )
 
   Xtr <- matrix(runif(20),ncol=3)
   Ytr <- modifiedBranin(Xtr)
-  print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.1))
+  newX <- callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 0.1)
+  testthat::expect_equal(
+    nrow(newX),
+    nrow(Xtr)
+  )
 
-  Xtr <- matrix(runif(20),ncol=3)
-  Ytr <- modifiedBranin(Xtr)
-  print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0))
-
-test_that("test dimensions", {
+  #working
+  testthat::expect_equal(
+    ncol(newX),
+    ncol(Xtr)
+  )
 
 })
 
-test_that("Xtr and Ytr equality", {
-
-})
 
 #2 tests for epsilon lower than 0.0
 #2 tests for epsilon higher than 1.0
 #2 tests for epsilon equal to 0.0 and 1.0
+#1 test for different dimension
 test_that("test epsilon", {
   Xtr <- matrix(runif(20),ncol=2)
   Ytr <- modifiedBranin(Xtr)
@@ -201,7 +209,8 @@ test_that("test epsilon", {
     callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 1.0),
     typeof(Xtr)
   )
+
+  Xtr <- matrix(runif(20),ncol=3)
+  Ytr <- modifiedBranin(Xtr)
+  print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0))
 })
-
-
-
