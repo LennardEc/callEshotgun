@@ -101,14 +101,14 @@ test_that("test dimensions", {
   Ytr <- sphere(Xtr)
 
   #working
-  newX <-callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 10L, 0.2)
+  newX <-callEshotgun(Xtr, Ytr, c(-5.12), c(5.12), 20L, 0.2)
   testthat::expect_equal(
     ncol(newX), ncol(Xtr)
   )
 
   #10 points get evaluaded
   testthat::expect_equal(
-    nrow(newX) + 10 , nrow(Xtr)
+    nrow(newX), nrow(Xtr)
   )
 
 
