@@ -18,7 +18,7 @@ sphere <- function (x) {
 
 #' egg
 #'
-#' @param x Vector
+#' @param xx Vector
 #'
 #' @return a atom
 #' @export
@@ -88,7 +88,7 @@ modifiedEgg <- function(x) {
 
 #' schwef
 #'
-#' @param x vector
+#' @param xx vector
 #'
 #' @return a atom
 #' @export
@@ -156,7 +156,7 @@ modifiedschwef <- function(x) {
 
 #' levy
 #'
-#' @param x vector
+#' @param xx vector
 #'
 #' @return a atom
 #' @export
@@ -228,7 +228,7 @@ modifiedLevy <- function(x) {
 
 #' branin
 #'
-#' @param x vector
+#' @param xx vector
 #' @param a double
 #' @param b double
 #' @param c double

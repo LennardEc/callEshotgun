@@ -1,3 +1,12 @@
+#' runSampleOpt
+#'
+#' @param fn function of the testproblem
+#' @param budget budget for the run
+#'
+#' @return
+#' @export
+#'
+#' @examples
 runSampleOpt <- function(fn, budget = 100){
   initBudget <- budget
   Xtr <- matrix(runif(20),ncol=2)
