@@ -15,14 +15,21 @@ runSampleOpt <- function(fn, budget = 100){
   budget <- initBudget - nrow(Xtr)
   while(budget > 0){
     newX <- callEshotgun(Xtr, Ytr, c(-5,-5), c(5,5))
-    print("initial worked")
-    print(newX)
+
     newY <- fn(newX)
     Xtr <- rbind(Xtr, newX)
-    print(Xtr)
-    Ytr <- c(Ytr, newY)
-    print(Ytr)
+
+    Ytr <- rbind(Ytr, newY)
+
     budget <- initBudget - nrow(Xtr)
   }
+
+  print(Xtr)
+  print(Ytr)
 }
 
+#runSampleOpt(sphere)
+#runSampleOpt(modifiedBranin)
+#runsampleOpt(modifiedEgg)
+#runSampleOpt(modifiedLevy)
+#runSampleOpt(modifiedschwef)
