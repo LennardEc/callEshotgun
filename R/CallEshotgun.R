@@ -6,8 +6,8 @@
 #' @import reticulate
 #'
 #' @export
-#' @examples checkLibrarys()
-checkLibrarys <- function() {
+#' @examples checkLibraries()
+checkLibraries <- function() {
   # Conda doesn't include all needed imports
   py_install("numpy", pip=TRUE)
   py_install("GPy==1.9.9", pip=TRUE)
