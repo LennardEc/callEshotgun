@@ -219,6 +219,6 @@ test_that("test epsilon", {
   Ytr <- modifiedBranin(Xtr)
   testthat::expect_equal(
     callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0),
-    null
+    NULL
   )
 })
