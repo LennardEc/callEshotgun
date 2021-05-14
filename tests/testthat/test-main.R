@@ -1,8 +1,7 @@
 #checking for the right dimensions and legal values of bounds
 test_that("test bounds", {
   Xtr <- matrix(runif(20),ncol=2)
-  Ytr <- sphere(Xtr)[1:8]
-  callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)
+  Ytr <- sphere(Xtr)
 
   # right dimension, legal values
   testthat::expect_type(
