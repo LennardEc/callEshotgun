@@ -1,7 +1,8 @@
 #checking for the right dimensions and legal values of bounds
 test_that("test bounds", {
   Xtr <- matrix(runif(20),ncol=2)
-  Ytr <- sphere(Xtr)
+  Ytr <- sphere(Xtr)[1:8]
+  callEshotgun(Xtr, Ytr, c(-5.12,-1), c(5.12, 0), 10L, 0.1)
 
   # right dimension, legal values
   testthat::expect_type(
@@ -217,5 +218,8 @@ test_that("test epsilon", {
 
   Xtr <- matrix(runif(20),ncol=3)
   Ytr <- modifiedBranin(Xtr)
-  print(callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0))
+  testthat::expect_equal(
+    callEshotgun(Xtr, Ytr, c(-5,-4,-3), c(5,6,7), 10L, 2.0),
+    null
+  )
 })
