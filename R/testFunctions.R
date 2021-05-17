@@ -175,7 +175,7 @@ schwef <- function(xx) {
 #'
 #' The schwefel Function applied to a matrix
 #'
-#' @param x
+#' @param x matrix with the initial points
 #'
 #' @return a matrix
 #' @export
