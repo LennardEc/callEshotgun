@@ -1,7 +1,7 @@
 #' Check for required Library and Python Packages
 #'
 #' The function will download all required Python Packages that
-#' are needed to e-shotgun to run properly.
+#' are rquired for the e-shotgun to run properly.
 #'
 #' @import reticulate
 #'
@@ -24,7 +24,13 @@ checkLibraries <- function() {
 #' Call the e-shotgun function in python
 #'
 #' The function checks the passed parameter and than calls the e-shotgun Python
-#' implementation and returns a matrix with the values evaluated by the e-shotgun
+#' implementation and returns a matrix with the evaluated points.
+#'
+#' George De Ath, Richard M. Everson, Jonathan E. Fieldsend, and Alma A. M. Rahat. 2020.
+#' ε-shotgun : ε-greedy Batch Bayesian Optimisation. In Genetic and Evolutionary Computation Conference (GECCO ’20), July 8–12, 2020, Cancún, Mexico.
+#' ACM, New York, NY, USA, 9 pages.
+#' https://doi.org/10.1145/3377930.3390154
+#' https://github.com/georgedeath/eshotgun
 #'
 #' @param Xtr a matrix containing the initial points
 #' @param Ytr a matrix containing the evaluation of Xtr with a given function

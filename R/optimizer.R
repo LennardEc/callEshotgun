@@ -1,5 +1,7 @@
 #' runSampleOpt
 #'
+#' Optimizing a function with the e-shotgun
+#'
 #' @param fn function of the testproblem
 #' @param budget budget for the run
 #'

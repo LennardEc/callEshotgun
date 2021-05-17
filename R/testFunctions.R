@@ -1,8 +1,40 @@
 #' sphere
 #'
-#' @param x Vector
+#' ##########################################################################
+#'#
+#'# SPHERE FUNCTION, MODIFIED
+#'#
+#'# Authors: Sonja Surjanovic, Simon Fraser University
+#'#          Derek Bingham, Simon Fraser University
+#'# Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
+#'#
+#'# Copyright 2013. Derek Bingham, Simon Fraser University.
+#'#
+#'# THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
+#'# FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
+#'# derivative works, such modified software should be clearly marked.
+#'# Additionally, this program is free software; you can redistribute it
+#'# and/or modify it under the terms of the GNU General Public License as
+#'# published by the Free Software Foundation; version 2.0 of the License.
+#'# Accordingly, this program is distributed in the hope that it will be
+#'# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+#'# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#'# General Public License for more details.
+#'#
+#'# For function details and reference information, see:
+#'# http://www.sfu.ca/~ssurjano/
+#'#
+#'##########################################################################
+#'#
+#'# INPUT:
+#'#
+#'# xx = c(x1, x2, x3, x4, x5, x6)
+#'#
+#'##########################################################################
 #'
-#' @return a matrix
+#' @param x Vector x = c(x1, x2, x3, x4, x5, x6)
+#'
+#' @return a matrix with the sphere function applied to each row
 #' @export
 #'
 #' @examples
@@ -18,45 +50,46 @@ sphere <- function (x) {
 
 #' egg
 #'
-#' @param xx Vector
+#'##########################################################################
+#'#
+#'# EGGHOLDER FUNCTION
+#'#
+#'# Authors: Sonja Surjanovic, Simon Fraser University
+#'#          Derek Bingham, Simon Fraser University
+#'# Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
+#'#
+#'# Copyright 2013. Derek Bingham, Simon Fraser University.
+#'#
+#'# THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
+#'# FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
+#'# derivative works, such modified software should be clearly marked.
+#'# Additionally, this program is free software; you can redistribute it
+#'# and/or modify it under the terms of the GNU General Public License as
+#'# published by the Free Software Foundation; version 2.0 of the License.
+#'# Accordingly, this program is distributed in the hope that it will be
+#'# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+#'# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#'# General Public License for more details.
+#'#
+#'# For function details and reference information, see:
+#'# http://www.sfu.ca/~ssurjano/
+#'#
+#'##########################################################################
+#'#
+#'# INPUT:
+#'#
+#'# xx = c(x1, x2)
+#'#
+#'##########################################################################
 #'
-#' @return a atom
+#'
+#' @param xx Vector with two elements xx = c(x1, x2)
+#'
+#' @return y an single double
 #' @export
 #'
 #' @examples
 egg <- function(xx) {
-  ##########################################################################
-  #
-  # EGGHOLDER FUNCTION
-  #
-  # Authors: Sonja Surjanovic, Simon Fraser University
-  #          Derek Bingham, Simon Fraser University
-  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
-  #
-  # Copyright 2013. Derek Bingham, Simon Fraser University.
-  #
-  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
-  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
-  # derivative works, such modified software should be clearly marked.
-  # Additionally, this program is free software; you can redistribute it
-  # and/or modify it under the terms of the GNU General Public License as
-  # published by the Free Software Foundation; version 2.0 of the License.
-  # Accordingly, this program is distributed in the hope that it will be
-  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  # General Public License for more details.
-  #
-  # For function details and reference information, see:
-  # http://www.sfu.ca/~ssurjano/
-  #
-  ##########################################################################
-  #
-  # INPUT:
-  #
-  # xx = c(x1, x2)
-  #
-  ##########################################################################
-
   x1 <- xx[1]
   x2 <- xx[2]
 
@@ -70,7 +103,9 @@ egg <- function(xx) {
 
 #' modifiedEgg
 #'
-#' @param x vector
+#' The Eggholder Function applied to a matrix
+#'
+#' @param x matrix with the inital points
 #'
 #' @return a matrix
 #' @export
@@ -88,45 +123,45 @@ modifiedEgg <- function(x) {
 
 #' schwef
 #'
+#'###########################################################################
+#'#
+#'# SCHWEFEL FUNCTION
+#'#
+#'# Authors: Sonja Surjanovic, Simon Fraser University
+#'#          Derek Bingham, Simon Fraser University
+#'# Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
+#'#
+#'# Copyright 2013. Derek Bingham, Simon Fraser University.
+#'#
+#'# THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
+#'# FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
+#'# derivative works, such modified software should be clearly marked.
+#'# Additionally, this program is free software; you can redistribute it
+#'# and/or modify it under the terms of the GNU General Public License as
+#'# published by the Free Software Foundation; version 2.0 of the License.
+#'# Accordingly, this program is distributed in the hope that it will be
+#'# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+#'# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#'# General Public License for more details.
+#'#
+#'# For function details and reference information, see:
+#'# http://www.sfu.ca/~ssurjano/
+#'#
+#'##########################################################################
+#'#
+#'# INPUT:
+#'#
+#'# xx = c(x1, x2, ..., xd)
+#'#
+#'##########################################################################
+#'
 #' @param xx vector
 #'
-#' @return a atom
+#' @return a double
 #' @export
 #'
 #' @examples
 schwef <- function(xx) {
-  ##########################################################################
-  #
-  # SCHWEFEL FUNCTION
-  #
-  # Authors: Sonja Surjanovic, Simon Fraser University
-  #          Derek Bingham, Simon Fraser University
-  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
-  #
-  # Copyright 2013. Derek Bingham, Simon Fraser University.
-  #
-  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
-  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
-  # derivative works, such modified software should be clearly marked.
-  # Additionally, this program is free software; you can redistribute it
-  # and/or modify it under the terms of the GNU General Public License as
-  # published by the Free Software Foundation; version 2.0 of the License.
-  # Accordingly, this program is distributed in the hope that it will be
-  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  # General Public License for more details.
-  #
-  # For function details and reference information, see:
-  # http://www.sfu.ca/~ssurjano/
-  #
-  ##########################################################################
-  #
-  # INPUT:
-  #
-  # xx = c(x1, x2, ..., xd)
-  #
-  ##########################################################################
-
   d <- length(xx)
 
   sum <- sum(xx*sin(sqrt(abs(xx))))
@@ -138,7 +173,9 @@ schwef <- function(xx) {
 
 #' modifiedschwef
 #'
-#' @param x vector
+#' The schwefel Function applied to a matrix
+#'
+#' @param x
 #'
 #' @return a matrix
 #' @export
@@ -156,45 +193,45 @@ modifiedschwef <- function(x) {
 
 #' levy
 #'
+#'##########################################################################
+#'#
+#'# LEVY FUNCTION
+#'#
+#'# Authors: Sonja Surjanovic, Simon Fraser University
+#'#          Derek Bingham, Simon Fraser University
+#'# Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
+#'#
+#'# Copyright 2013. Derek Bingham, Simon Fraser University.
+#'#
+#'# THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
+#'# FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
+#'# derivative works, such modified software should be clearly marked.
+#'# Additionally, this program is free software; you can redistribute it
+#'# and/or modify it under the terms of the GNU General Public License as
+#'# published by the Free Software Foundation; version 2.0 of the License.
+#'# Accordingly, this program is distributed in the hope that it will be
+#'# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+#'# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#'# General Public License for more details.
+#'#
+#'# For function details and reference information, see:
+#'# http://www.sfu.ca/~ssurjano/
+#'#
+#'##########################################################################
+#'#
+#'# INPUT:
+#'#
+#'# xx = c(x1, x2, ..., xd)
+#'#
+#'##########################################################################
+#'
 #' @param xx vector
 #'
-#' @return a atom
+#' @return a dounle
 #' @export
 #'
 #' @examples
 levy <- function(xx) {
-  ##########################################################################
-  #
-  # LEVY FUNCTION
-  #
-  # Authors: Sonja Surjanovic, Simon Fraser University
-  #          Derek Bingham, Simon Fraser University
-  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
-  #
-  # Copyright 2013. Derek Bingham, Simon Fraser University.
-  #
-  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
-  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
-  # derivative works, such modified software should be clearly marked.
-  # Additionally, this program is free software; you can redistribute it
-  # and/or modify it under the terms of the GNU General Public License as
-  # published by the Free Software Foundation; version 2.0 of the License.
-  # Accordingly, this program is distributed in the hope that it will be
-  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  # General Public License for more details.
-  #
-  # For function details and reference information, see:
-  # http://www.sfu.ca/~ssurjano/
-  #
-  ##########################################################################
-  #
-  # INPUT:
-  #
-  # xx = c(x1, x2, ..., xd)
-  #
-  ##########################################################################
-
   d <- length(xx)
   w <- 1 + (xx - 1)/4
 
@@ -208,7 +245,10 @@ levy <- function(xx) {
   return(y)
 }
 
+
 #' modifiedlevy
+#'
+#' The Levy Funciton applied to a matrix
 #'
 #' @param x vector
 #'
@@ -228,6 +268,44 @@ modifiedLevy <- function(x) {
 
 #' branin
 #'
+#'##########################################################################
+#'# BRANIN FUNCTION
+#'#
+#'# Authors: Sonja Surjanovic, Simon Fraser University
+#'#          Derek Bingham, Simon Fraser University
+#'# Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
+#'#
+#'# Copyright 2013. Derek Bingham, Simon Fraser University.
+#'#
+#'# THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
+#'# FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
+#'# derivative works, such modified software should be clearly marked.
+#'# Additionally, this program is free software; you can redistribute it
+#'# and/or modify it under the terms of the GNU General Public License as
+#'# published by the Free Software Foundation; version 2.0 of the License.
+#'# Accordingly, this program is distributed in the hope that it will be
+#'# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+#'# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#'# General Public License for more details.
+#'#
+#'# For function details and reference information, see:
+#'# http://www.sfu.ca/~ssurjano/
+#'#
+#'##########################################################################
+#'#
+#'# INPUTS:
+#'#
+#'# xx = c(x1, x2)
+#'# a = constant (optional), with default value 1
+#'# b = constant (optional), with default value 5.1/(4*pi^2)
+#'# c = constant (optional), with default value 5/pi
+#'# r = constant (optional), with default value 6
+#'# s = constant (optional), with default value 10
+#'# t = constant (optional), with default value 1/(8*pi)
+#'#
+#'##########################################################################
+#'
+#'
 #' @param xx vector
 #' @param a double
 #' @param b double
@@ -236,48 +314,11 @@ modifiedLevy <- function(x) {
 #' @param s double
 #' @param t double
 #'
-#' @return a matrix
+#' @return a one single double
 #' @export
 #'
 #' @examples
 branin <- function(xx, a=1, b=5.1/(4*pi^2), c=5/pi, r=6, s=10, t=1/(8*pi)) {
-  ##########################################################################
-  #
-  # BRANIN FUNCTION
-  #
-  # Authors: Sonja Surjanovic, Simon Fraser University
-  #          Derek Bingham, Simon Fraser University
-  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
-  #
-  # Copyright 2013. Derek Bingham, Simon Fraser University.
-  #
-  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
-  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
-  # derivative works, such modified software should be clearly marked.
-  # Additionally, this program is free software; you can redistribute it
-  # and/or modify it under the terms of the GNU General Public License as
-  # published by the Free Software Foundation; version 2.0 of the License.
-  # Accordingly, this program is distributed in the hope that it will be
-  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  # General Public License for more details.
-  #
-  # For function details and reference information, see:
-  # http://www.sfu.ca/~ssurjano/
-  #
-  ##########################################################################
-  #
-  # INPUTS:
-  #
-  # xx = c(x1, x2)
-  # a = constant (optional), with default value 1
-  # b = constant (optional), with default value 5.1/(4*pi^2)
-  # c = constant (optional), with default value 5/pi
-  # r = constant (optional), with default value 6
-  # s = constant (optional), with default value 10
-  # t = constant (optional), with default value 1/(8*pi)
-  #
-  ##########################################################################
 
   x1 <- xx[1]
   x2 <- xx[2]
@@ -291,9 +332,11 @@ branin <- function(xx, a=1, b=5.1/(4*pi^2), c=5/pi, r=6, s=10, t=1/(8*pi)) {
 
 #' modifiedBranin
 #'
-#' @param x vector
+#' The Branin Function applied to a matrix
 #'
-#' @return a matrix
+#' @param x matrix with the initial points
+#'
+#' @return m a matrix
 #' @export
 #'
 #' @examples
