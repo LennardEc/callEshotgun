@@ -10,7 +10,7 @@ from pyDOE2.doe_lhs import lhs
 
 # The following code, besides the function "def callShotgun(Xtr, Ytr, f_lb, f_ub, q=10, epsilon = 0.1):", was developed by
 # George De Ath, Richard M. Everson, Jonathan E. Fieldsend, and Alma A. M. Rahat. 2020.
-# ε-shotgun : ε-greedy Batch Bayesian Optimisation. In Genetic and Evolutionary Computation Conference (GECCO ’20), July 8–12, 2020, Cancún, Mexico. 
+# e-shotgun : e-greedy Batch Bayesian Optimisation. In Genetic and Evolutionary Computation Conference (GECCO ’20), July 8–12, 2020, Cancún, Mexico. 
 # ACM, New York, NY, USA, 9 pages. 
 # https://doi.org/10.1145/3377930.3390154
 # https://github.com/georgedeath/eshotgun

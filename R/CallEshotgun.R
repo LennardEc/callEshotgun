@@ -5,20 +5,24 @@
 #'
 #' @import reticulate
 #'
+#' @param method method of installation
+#' @param conda environment
+#'
 #' @export
 #' @examples checkLibraries()
-checkLibraries <- function() {
+checkLibraries <- function(method = "auto", conda = "auto") {
   # Conda doesn't include all needed imports
-  py_install("numpy", pip=TRUE)
-  py_install("GPy==1.9.9", pip=TRUE)
-  py_install("pygmo", pip=TRUE)
-  py_install("scipy", pip=TRUE)
-  py_install("cma", pip=TRUE)
-  py_install("nlopt", pip=TRUE)
-  py_install("pyDOE2", pip=TRUE)
-  py_install("numpy-stl", pip=TRUE)
-  py_install("matplotlib", pip=TRUE)
+  reticulate::py_install("numpy", method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("GPy==1.9.9", method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("pygmo",method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("scipy", method = method, conda = conda)
+  reticulate::py_install("cma", method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("nlopt", method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("pyDOE2", method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("numpy-stl", method = method, conda = conda, pip=TRUE)
+  reticulate::py_install("matplotlib", method = method, conda = conda, pip=TRUE)
 }
+
 
 
 #' Call the e-shotgun function in python
@@ -27,7 +31,7 @@ checkLibraries <- function() {
 #' implementation and returns a matrix with the evaluated points.
 #'
 #' George De Ath, Richard M. Everson, Jonathan E. Fieldsend, and Alma A. M. Rahat. 2020.
-#' ε-shotgun : ε-greedy Batch Bayesian Optimisation. In Genetic and Evolutionary Computation Conference (GECCO ’20), July 8–12, 2020, Cancún, Mexico.
+#' e-shotgun : e-greedy Batch Bayesian Optimisation. In Genetic and Evolutionary Computation Conference (GECCO ’20), July 8–12, 2020, Cancún, Mexico.
 #' ACM, New York, NY, USA, 9 pages.
 #' https://doi.org/10.1145/3377930.3390154
 #' https://github.com/georgedeath/eshotgun
