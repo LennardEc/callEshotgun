@@ -11,16 +11,24 @@
 #' @export
 #' @examples checkLibraries()
 checkLibraries <- function(method = "auto", conda = "auto") {
-  # Conda doesn't include all needed imports
-  reticulate::py_install("numpy", method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("GPy==1.9.9", method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("pygmo",method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("scipy", method = method, conda = conda)
-  reticulate::py_install("cma", method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("nlopt", method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("pyDOE2", method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("numpy-stl", method = method, conda = conda, pip=TRUE)
-  reticulate::py_install("matplotlib", method = method, conda = conda, pip=TRUE)
+
+  # check if a python environment exists
+  pythonEnv <- reticulate::virtualenv_exists()
+
+  if(pythonEnv) {
+    # Conda doesn't include all needed imports
+    reticulate::py_install("numpy", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("GPy==1.9.9", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("pygmo",method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("scipy", method = method, conda = conda)
+    reticulate::py_install("cma", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("nlopt", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("pyDOE2", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("numpy-stl", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("matplotlib", method = method, conda = conda, pip=TRUE)
+  }else {
+    print("Python environment is missing")
+  }
 }
 
 
@@ -49,7 +57,7 @@ checkLibraries <- function(method = "auto", conda = "auto") {
 #' @examples
 callEshotgun <- function(Xtr, Ytr, f_lb, f_ub, q=10L, epsilon=0.1) {
   py_run_file(system.file("EshotgunPy.py", package="CallEshotgun"))
-  np <- import("numpy", convert = FALSE)
+  np <- import("numpy", convert = FALSE, delay_load = TRUE)
 
   Xnew <- tryCatch({
     errorMsg <- "Unkown"
