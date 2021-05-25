@@ -18,9 +18,9 @@ checkLibraries <- function(method = "auto", conda = "auto") {
   if(pythonEnv) {
     # Conda doesn't include all needed imports
     reticulate::py_install("numpy", method = method, conda = conda, pip=TRUE)
-    reticulate::py_install("GPy==1.9.9", method = method, conda = conda, pip=TRUE)
-    reticulate::py_install("pygmo",method = method, conda = conda, pip=TRUE)
-    reticulate::py_install("scipy", method = method, conda = conda)
+    reticulate::py_install("GPy", method = method, conda = conda, pip=TRUE)
+    reticulate::py_install("pygmo",method = method, conda = conda)
+    reticulate::py_install("scipy", method = method, conda = conda, pip=TRUE)
     reticulate::py_install("cma", method = method, conda = conda, pip=TRUE)
     reticulate::py_install("nlopt", method = method, conda = conda, pip=TRUE)
     reticulate::py_install("pyDOE2", method = method, conda = conda, pip=TRUE)
